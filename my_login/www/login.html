@@ -1,9 +1,9 @@
 {% extends "templates/web.html" %}
 
 {#- ======================================================================
-    Dagaar Technology — Elegant Login (v2 — Compact Glass Edition)
+    Dagaar Technology — Elegant Login (v2 Compact Glass)
     Wraps Frappe v15's functional login skeleton in a compact split layout
-    with a glassmorphism brand panel. No scrolling needed.
+    with glassmorphism brand panel. No scrolling needed.
 ====================================================================== -#}
 
 {% block title %}{{ _("Sign in") }} · {{ company_name }}{% endblock %}
@@ -97,18 +97,22 @@
 
 		{#- ============ LEFT — GLASS BRAND PANEL ============ -#}
 		<aside class="dg-brand">
+			{#- Base green gradient -#}
 			<div class="dg-brand-bg"></div>
+			{#- Diagonal second tone -#}
+			<div class="dg-brand-diagonal"></div>
+			{#- Glass frost overlay -#}
+			<div class="dg-glass-overlay"></div>
+			{#- Atmospheric glows -#}
 			<div class="dg-brand-glow dg-glow-a"></div>
 			<div class="dg-brand-glow dg-glow-b"></div>
 			<div class="dg-brand-grain"></div>
-			<div class="dg-glass-overlay"></div>
 
 			<header class="dg-brand-head">
 				<div class="dg-logo-tile">
-					<img id="brand-logo"
-						src="{{ brand_logo or brand_logo_fallback }}"
+					<img src="{{ brand_logo or dagaar_logo }}"
 						alt="{{ company_name }}"
-						onerror="this.src='{{ brand_logo_fallback }}'; this.onerror=null;">
+						onerror="this.src='{{ dagaar_logo }}'; this.onerror=null;">
 				</div>
 				<div class="dg-brand-name">
 					<strong>{{ company_name }}</strong>
@@ -117,19 +121,26 @@
 			</header>
 
 			<div class="dg-brand-middle">
-				<div class="dg-eyebrow">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>
-					{{ _("Enterprise Secure Access") }}
+				{#- Watermark — Company doctype logo (default company), fallback Dagaar -#}
+				<img class="dg-watermark"
+					src="{{ company_logo_image or dagaar_logo }}"
+					alt=""
+					onerror="this.src='{{ dagaar_logo }}'; this.onerror=null;">
+
+				<div class="dg-brand-middle-inner">
+					<div class="dg-eyebrow">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>
+						Dagaar Technology®
+					</div>
+					<p class="dg-copyright">© 2023 Dagaar, Inc. All rights reserved. Dagaar, Technology,<br><a href="https://dagaar.com/" target="_blank" rel="noopener" class="dg-terms-link">Terms and conditions</a>, subject to change without notice.<br>Powered by DagaarTech®</p>
 				</div>
-				<h1 class="dg-headline">{{ portal_tagline }}</h1>
-				<p class="dg-desc">{{ portal_description }}</p>
 			</div>
 
 			<footer class="dg-brand-foot">
 				<div class="dg-chips">
 					<span class="dg-chip">
 						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-						{{ _("24/7 Security") }}
+						{{ _("24/7 Security Operations") }}
 					</span>
 					<span class="dg-chip">
 						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
@@ -287,18 +298,23 @@
 						<span class="dg-help">
 							{{ _("Need help?") }}
 							{% if support_email %}
-							<a href="mailto:{{ support_email }}">
+							<a href="https://wa.me/252633381823?text=Need%20help" target="_blank" rel="noopener">
 								<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/></svg>
 								{{ _("IT Support") }}
 							</a>
 							{% else %}
-							<a href="/contact">
+							<a href="https://wa.me/252633381823?text=Need%20help" target="_blank" rel="noopener">
 								<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/></svg>
 								{{ _("IT Support") }}
 							</a>
 							{% endif %}
 						</span>
-						<span class="dg-version">{{ portal_version }}</span>
+						<span class="dg-version">
+							<img src="{{ dagaar_logo }}"
+								alt="" style="height:38px;max-width:34px;width:auto;display:block;object-fit:contain;"
+								loading="lazy"
+								onerror="this.style.display='none';">
+						</span>
 					</footer>
 				</div>
 
